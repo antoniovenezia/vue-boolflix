@@ -9,6 +9,7 @@
         <img :src="flagLanguage(originalLanguage)" alt="" class="">
       </div>
       <div>Voto: {{vote}}</div>
+      <!-- <i class="fab fa-acquisitions-incorporated"></i> -->
     </div>
 
   </div>
