@@ -1,13 +1,18 @@
 <template>
   <div class="header">
     <img src="https://serietvconcept.files.wordpress.com/2021/05/netflix.png?w=1024" alt="">
-    <input type="text" placeholder="Search">
+    <input type="text" placeholder="Search" v-model="searchString" @keyup.enter="$emit('search', searchString)">
   </div>
 </template>
 
 <script>
 export default {
   name: 'Header',
+  data() {
+    return{
+      searchString: "",
+    }
+  },
   props: {
   }
 }

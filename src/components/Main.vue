@@ -1,9 +1,12 @@
 <template>
-  <div class="main">
+  <div class="main row justify-content-center">
 
-    <Card v-for="film in films" :key="film.id" 
+    <Card class="col-4" v-for="film in films" :key="film.id" 
     :title="film.title"
     :date="film.release_date"
+    :originalLanguage="film.original_language"
+    :vote="film.vote_average"
+    :image="film.poster_path"
     />
 
   </div>
@@ -17,6 +20,10 @@ export default {
 
   components: {
     Card,
+  },
+
+  methods: {
+
   },
 
   props: {

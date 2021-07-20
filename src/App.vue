@@ -1,7 +1,7 @@
 <template>
   <div id="app">
-    <Header />
-    <Main class="container" :films="films"/>
+    <Header @search="searchFilm"/>
+    <Main class="main" :films="filmsFiltered"/>
   </div>
 </template>
 
@@ -18,21 +18,35 @@ export default {
   },
   data() {
     return{
-      films: [],
-       }
+      popular: [],
+      filmsFiltered: [],
+      }
   },
   created() {
-      axios.get('https://api.themoviedb.org/3/search/movie?api_key=8bdc9f673b987154606c7ccf367b5a13&query=ritorno+al+futuro')
+      axios.get('https://api.themoviedb.org/3/movie/popular?api_key=8bdc9f673b987154606c7ccf367b5a13')
         .then((result) => {
-            this.films = result.data.results
+            this.popular = result.data.results;
+            this.filmsFiltered = result.data.results;
             // console.log(this.films)
         });
-    }, 
+  }, 
+  methods: {
+    searchFilm (searchString) {
+      if(searchString.length == 0) {
+        this.filmsFiltered = this.popular
+        return;
+        }
+          axios.get(`https://api.themoviedb.org/3/search/multi?api_key=8bdc9f673b987154606c7ccf367b5a13&query=${searchString}`)
+          .then((result) => {
+          this.filmsFiltered = result.data.results;
+          })
+        
+    }
+  },
+
 }
 </script>
 
 <style lang="scss">
-// #app {
-  
-// }
+
 </style>
